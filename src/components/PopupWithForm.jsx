@@ -1,7 +1,7 @@
 import React from "react";
 import "../index";
 
-const PopupWithForm = ({ title, name, children, isOpen, onClose }) => {
+const PopupWithForm = ({ title, name, children, isOpen, onClose, buttonText}) => {
   return (
     <div
       className={`popup ${isOpen ? "popup_opened" : ""}`}
@@ -22,6 +22,9 @@ const PopupWithForm = ({ title, name, children, isOpen, onClose }) => {
           noValidate
         >
           {children}
+          <button type="submit" className="popup__submit">
+          {buttonText}
+          </button>
         </form>
       </div>
     </div>

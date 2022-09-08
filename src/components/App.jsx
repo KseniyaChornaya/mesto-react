@@ -58,6 +58,7 @@ function App() {
           name={"profile"}
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
+          buttonText="Сохранить"
         >
           <input
             required
@@ -81,15 +82,13 @@ function App() {
             maxLength="200"
           />
           <span className="popup__input-error" id="job-error"></span>
-          <button type="submit" className="popup__submit" id="editSubmit">
-            Сохранить
-          </button>
         </PopupWithForm>
         <PopupWithForm
           title={"Новое место"}
           name={"place"}
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
+          buttonText="Cоздать"
         >
           <input
             required
@@ -112,24 +111,15 @@ function App() {
             minLength="2"
           />
           <span className="popup__input-error" id="link-error"></span>
-          <button type="submit" className="popup__submit" id="addSubmit">
-            Создать
-          </button>
         </PopupWithForm>
-        <PopupWithForm title={"Вы уверены?"} name={"confirmation"}>
-          <button
-            type="submit"
-            className="popup__submit"
-            id="confirmationSubmit"
-          >
-            Да
-          </button>
+        <PopupWithForm title={"Вы уверены?"} name={"confirmation"}  buttonText="Да">
         </PopupWithForm>
         <PopupWithForm
           title={"Обновить аватар"}
           name={"avatar"}
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
+          buttonText="Сохранить"
         >
           <input
             required
@@ -141,9 +131,6 @@ function App() {
             minLength="2"
           />
           <span className="popup__input-error" id="avatarLink-error"></span>
-          <button type="submit" className="popup__submit" id="avatarSubmit">
-            Сохранить
-          </button>
         </PopupWithForm>
       </div>
     </div>
