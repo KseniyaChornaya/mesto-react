@@ -63,12 +63,24 @@ class Api {
     .then((res) => this._getJsonErrors(res))
   }
 
-  toggleLike(id, isLike) {
+  toggleLike(id, isLiked) {
     return fetch(`${this._host}cards/${id}/likes`, {
-      method: isLike ? "DELETE" : "PUT",
+      method: isLiked ? "DELETE" : "PUT",
       headers: this._headers,
     })
     .then((res) => this._getJsonErrors(res))
+  }
+
+  _handleLike(method, id) {
+    return fetch(`${this._host}/cards/${id}/likes`, {
+        method: method,
+        headers: this._headers
+    })
+    .then((res) => this._getJsonErrors(res))
+}
+
+  changeLikeCardStatus(id, isLiked) {
+    return isLiked ? this._handleLike('DELETE', id) : this._handleLike('PUT', id)
   }
 }
 

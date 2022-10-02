@@ -1,40 +1,24 @@
-import React, { useEffect, useState } from "react";
-import api from "../utils/Api";
+import React, { useContext } from "react";
 import Card from "./Card";
 import "../index";
+import CurrentUserContext  from "../context/CurrentUserContext";
 
-function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
-  const [userAvatar, setUserAvatar] = useState("");
-  const [userName, setUserName] = useState("");
-  const [userDescription, setUserDescription] = useState("");
-  const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-    Promise.all([api.getUserInfo(), api.getCards()])
-      .then(([data, initialCards]) => {
-        setUserName(data.name);
-        setUserDescription(data.about);
-        setUserAvatar(data.avatar);
-        setCards(initialCards);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, cards, onCardLike, onCardDelete}) {
+  const currentUser = useContext(CurrentUserContext);
 
   return (
     <>
       <section className="profile">
         <img
           className="profile__avatar"
-          src={userAvatar}
+          src={currentUser.avatar}
           alt="Аватар"
-          style={{ backgroundImage: `url(${userAvatar})` }}
+          style={{ backgroundImage: `url(${currentUser.avatar})` }}
         />
         <div className="profile__avatar-edit" onClick={onEditAvatar}></div>
         <div className="profile__info">
           <div className="profile__wrap">
-            <h1 className="profile__name">{userName ?? "Chornaya Kseniya"} </h1>
+            <h1 className="profile__name">{currentUser.name ?? "Chornaya Kseniya"} </h1>
             <button
               className="profile__edit-button"
               type="button"
@@ -42,7 +26,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
               onClick={onEditProfile}
             ></button>
           </div>
-          <p className="profile__job">{userDescription ?? "Traveler"}</p>
+          <p className="profile__job">{currentUser.about ?? "Traveler"}</p>
         </div>
         <button
           className="profile__add-button"
@@ -60,6 +44,9 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
             image={card.link}
             likesCount={card.likes.length}
             onCardClick={onCardClick}
+            currentUser={currentUser}
+            onCardLike={onCardLike}
+            onCardDelete={onCardDelete}
           />
         ))}
       </section>

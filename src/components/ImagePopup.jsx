@@ -7,7 +7,6 @@ const ImagePopup = ({ onClose, card, isImageOpen }) => {
       <div className="popup__container popup__container_place">
         <button
           className="popup__close"
-        //   id="image_close"
           type="button"
           onClick={onClose}
         />
