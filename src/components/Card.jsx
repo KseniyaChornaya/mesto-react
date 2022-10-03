@@ -1,8 +1,8 @@
-import React from "react";
-import "../index";
+import React, { useContext } from "react";
+import CurrentUserContext  from "../context/CurrentUserContext";
 
-const Card = ({ currentUser, onCardLike, onCardDelete, onCardClick, card }) => {
-
+const Card = ({onCardLike, onCardDelete, onCardClick, card }) => {
+  const currentUser = useContext(CurrentUserContext);
   const isOwn = card.owner._id === currentUser._id;
 
   const cardDeleteButtonClassName = (
@@ -10,7 +10,6 @@ const Card = ({ currentUser, onCardLike, onCardDelete, onCardClick, card }) => {
   ); 
 
   const isLiked = card.likes.some(i => i._id === currentUser._id);
-
   const cardLikeButtonClassName = (
     `card__like ${isLiked ? 'card__like_active' : ''}`
     ); 
@@ -27,7 +26,8 @@ const Card = ({ currentUser, onCardLike, onCardDelete, onCardClick, card }) => {
       <button 
         className={cardDeleteButtonClassName}
         onClick={() => onCardDelete(card)}
-        type="button"></button>
+        type="button"
+        />
       <div className="card__describe">
         <h2 className="card__title">{card.name}</h2>
         <div className="card__like-container">

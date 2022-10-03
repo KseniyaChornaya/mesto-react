@@ -1,19 +1,17 @@
 import React, { useContext } from "react";
 import Card from "./Card";
-import "../index";
 import CurrentUserContext  from "../context/CurrentUserContext";
 
 function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, cards, onCardLike, onCardDelete}) {
   const currentUser = useContext(CurrentUserContext);
 
   return (
-    <>
+    <main>
       <section className="profile">
         <img
           className="profile__avatar"
           src={currentUser.avatar}
           alt="Аватар"
-          style={{ backgroundImage: `url(${currentUser.avatar})` }}
         />
         <div className="profile__avatar-edit" onClick={onEditAvatar}></div>
         <div className="profile__info">
@@ -24,7 +22,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, cards, onC
               type="button"
               data-popup="edit"
               onClick={onEditProfile}
-            ></button>
+            />
           </div>
           <p className="profile__job">{currentUser.about ?? "Traveler"}</p>
         </div>
@@ -33,7 +31,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, cards, onC
           type="button"
           data-popup="add"
           onClick={onAddPlace}
-        ></button>
+        />
       </section>
       <section className="cards">
         {cards.map((card) => (
@@ -50,7 +48,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, cards, onC
           />
         ))}
       </section>
-    </>
+    </main>
   );
 }
 
